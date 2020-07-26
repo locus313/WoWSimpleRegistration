@@ -33,7 +33,7 @@ require_once 'header.php'; ?>
             <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-register" role="tabpanel"
                      aria-labelledby="nav-register-tab">
-                    <?php require_once base_path . 'template/' . get_config('template') . '/tpl/server-info.php'; ?>
+
                     <div class="row">
                         <div class="col-md-6">
                             <form action="" method="post">
