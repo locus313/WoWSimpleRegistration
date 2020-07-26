@@ -9,8 +9,8 @@
 <div style="text-align: left;padding: 10px;line-height: 1.5;">
     <p>1. First of all, you must create an account. The account is used to log into both the game and our website. Click
         here to open the registration page.</p>
-    <p>2. Install World of Warcraft. You can download it (legally) from here: Windows or Mac. Make sure to upgrade to
-        our current supported patch, which is 3.3.5 (build 12340). Patch mirrors can be found here. </p>
+    <p>2. Install World of Warcraft. You can download it from here: <a href="https://mega.nz/file/sZpCBaaB#bsWKA3FeRtY0O7aBi6m4RKy1nvXF-XgnIv2vLmHb9Zo" target="_blank" style="color:red">Windows</a> <!-- or Mac. Make sure to upgrade to
+        our current supported patch, which is 3.3.5 (build 12340). Patch mirrors can be found here. --> </p>
     <p>3. Open up the "World of Warcraft" directory. The default directory is "C:\Program Files\World of Warcraft". When
         you've found it, open up the directory called "data", then go into the directory called either enUS or enGB,
         depending on your client language.</p>
