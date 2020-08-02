@@ -1,6 +1,6 @@
 # Simple Register Page for TrinityCore/AzerothCore/AshamaneCore/CMangos
 
-With this script you can make a website for your game server.
+With this script, You can make a website for your game server.
 
 Support : [AzerothCore](http://azerothcore.org), [TrinityCore](http://TrinityCore.org), [AshamaneCore](https://github.com/ReyDonovan/AshamaneCoreLegacy/), [CMangos](https://github.com/cmangos/).
 
@@ -8,7 +8,7 @@ Support : [AzerothCore](http://azerothcore.org), [TrinityCore](http://TrinityCor
 
  - Download project & unzip.
  - Go to `application/config/` folder and change `config.php.sample` file name to `config.php`
- - Open config file and set your server data.
+ - Open the config file and set your server data.
  - Enjoy that.
 
 ## Requirement : PHP >= 7.0
@@ -17,7 +17,7 @@ Enable gd, soap, mbstring, pdo and pdo-mysql.
 
 # Debug
 
-If you got blank screen, You can enable `debug_mode` in config file.
+If you got a blank screen, You can enable `debug_mode` in the config file.
 
 ## Features
 
@@ -29,9 +29,23 @@ If you got blank screen, You can enable `debug_mode` in config file.
  6. Change Password (4/10/2019).
  7. Restore Password (5/31/2019).
  8. Vote System (4/03/2020).
+ 9. Support HCaptcha/Recaptcha v2 (7/27/2020).
+ 9. Support Two-Factor Authentication (2FA) (7/28/2020).
 
 ## Changelogs
 
+ **1.9.7 (7/28/2020):**
+ 1. Support Two-Factor Authentication (2FA)
+ 2. Fixed a low-level vulnerability. (UPDATE TO THIS VERSION)
+ 3. Fixed some of the bugs.
+ 3. Allow running `account set addon` command after registration. (SOAP registration)
+ 
+ **1.9.6 (7/27/2020):**
+ 1. Support HCaptcha/Recaptcha/Image captcha.
+ 2. Fixed page load speed!
+ 3. Add more description for the config file.
+ 3. Update composer packages.
+ 
  **1.9.5 (4/17/2020):**
  1. Register/Restore Password via SOAP. (Support CMangos)
  
@@ -54,7 +68,9 @@ If you got blank screen, You can enable `debug_mode` in config file.
  
 ## DEMO
 
-RESTORE PASSWORD DOSEN'T WORK IN DEMO VERSIONS.
+RESTORE PASSWORD DOESN'T WORK IN DEMO VERSIONS.
+
+### LIVE DEMO IS FOR OLD VERSION!
 
 [Light Template](http://wowsimpleregistration.gigfa.com/light/)
 
@@ -69,38 +85,19 @@ Advance Template - NO HAVE LIVE DEMO!
 ## Advance Template
 
 ![BFA](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-bfa-min.jpg)
-![LEGION](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-legion-min.jpg)
-![WOD](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-wod-min.jpg)
-![MOP](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-mop-min.jpg)
-![Cata](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-cata-min.jpg)
-![Lich King](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-lichking-min.jpg)
-![TBC](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-tbc-min.jpg)
-![Classic](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-vanilla-min.jpg)
 
 ## Light Template
 
 ![Register Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/1.jpg)
-![Status Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/2.jpg)
-![How to Connect Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/3.jpg)
-![Contact us Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/4.jpg)
-![TOPS](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/5.jpg)
 
 ## IceCrown Template
 
 ![Home Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/i1.jpg)
-![Register Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/i2.jpg)
-![Status Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/i3.jpg)
-![Contact us Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/i4.jpg)
-![TOP](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/i5.jpg)
-
 ## Kael'thas Template
 
 ![Home Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k1.jpg)
-![Register Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k2.jpg)
-![How to Connect Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k3.jpg)
-![Status Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k4.jpg)
-![Contact us Page](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k5.jpg)
-![TOP](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/k6.jpg)
+
+Need more screenshots? [Check here](https://github.com/masterking32/WoWSimpleRegistration/tree/master/screenshots)
 
 ## Programmers
 

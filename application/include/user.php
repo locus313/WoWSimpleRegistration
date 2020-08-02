@@ -19,7 +19,12 @@ class user
             self::restorepassword_setnewpw($_GET['restore'], $_GET['key']);
         }
 
+        if (!empty($_GET['enabletfa']) && !empty($_GET['account'])) {
+            self::account_set_2fa($_GET['enabletfa'], $_GET['account']);
+        }
+
         if (!empty($_POST['submit'])) {
+            self::tfa_enable();
             if (get_config('battlenet_support')) {
                 self::bnet_register();
                 self::bnet_changepass();
@@ -28,15 +33,19 @@ class user
                 self::normal_changepass();
             }
             self::restorepassword();
-            unset($_SESSION['captcha']);
-            self::$captcha = new CaptchaBuilder;
-            self::$captcha->build();
-            $_SESSION['captcha'] = self::$captcha->getPhrase();
+            if (empty(get_config('captcha_type'))) {
+                unset($_SESSION['captcha']);
+                self::$captcha = new CaptchaBuilder;
+                self::$captcha->build();
+                $_SESSION['captcha'] = self::$captcha->getPhrase();
+            }
         } else {
-            unset($_SESSION['captcha']);
-            self::$captcha = new CaptchaBuilder;
-            self::$captcha->build();
-            $_SESSION['captcha'] = self::$captcha->getPhrase();
+            if (empty(get_config('captcha_type'))) {
+                unset($_SESSION['captcha']);
+                self::$captcha = new CaptchaBuilder;
+                self::$captcha->build();
+                $_SESSION['captcha'] = self::$captcha->getPhrase();
+            }
         }
     }
 
@@ -47,16 +56,13 @@ class user
     public static function bnet_register()
     {
         global $antiXss;
-        if (!($_POST['submit'] == 'register' && !empty($_POST['password']) && !empty($_POST['repassword']) && !empty($_POST['email']) && !empty($_POST['captcha']) && !empty($_SESSION['captcha']))) {
+        if ($_POST['submit'] != 'register' || empty($_POST['password']) || empty($_POST['repassword']) || empty($_POST['email'])) {
             return false;
         }
 
-        if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
+        if (!captcha_validation()) {
             return false;
         }
-
-        unset($_SESSION['captcha']);
 
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             error_msg('Use valid email.');
@@ -106,16 +112,14 @@ class user
     public static function normal_register()
     {
         global $antiXss;
-        if (!($_POST['submit'] == 'register' && !empty($_POST['password']) && !empty($_POST['username']) && !empty($_POST['repassword']) && !empty($_POST['email']) && !empty($_POST['captcha']) && !empty($_SESSION['captcha']))) {
+        if ($_POST['submit'] != 'register' || empty($_POST['password']) || empty($_POST['username']) || empty($_POST['repassword']) || empty($_POST['email'])) {
             return false;
         }
 
-        if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
+        if (!captcha_validation()) {
             return false;
         }
 
-        unset($_SESSION['captcha']);
         if (!preg_match('/^[0-9A-Z-_]+$/', strtoupper($_POST['username']))) {
             error_msg('Use valid characters for username.');
             return false;
@@ -151,7 +155,7 @@ class user
             return false;
         }
 
-        if (empty(get_config('use_soap'))) {
+        if (empty(get_config('soap_for_register'))) {
             $hashed_pass = strtoupper(sha1(strtoupper($_POST['username'] . ':' . $_POST['password'])));
             database::$auth->insert('account', [
                 'username' => $antiXss->xss_clean(strtoupper($_POST['username'])),
@@ -166,6 +170,12 @@ class user
             $command = str_replace('{PASSWORD}', $antiXss->xss_clean($_POST['password']), $command);
             $command = str_replace('{EMAIL}', $antiXss->xss_clean(strtoupper($_POST['email'])), $command);
             if (RemoteCommandWithSOAP($command)) {
+                if (!empty(get_config('soap_asa_command'))) {
+                    $command_addon = str_replace('{USERNAME}', $antiXss->xss_clean(strtoupper($_POST['username'])), get_config('soap_asa_command'));
+                    $command_addon = str_replace('{EXPANSION}', get_config('expansion'), $command_addon);
+                    RemoteCommandWithSOAP($command_addon);
+                }
+
                 database::$auth->update('account', [
                     'email' => $antiXss->xss_clean(strtoupper($_POST['email']))
                 ], ['username' => Medoo::raw('UPPER(:username)', [':username' => $antiXss->xss_clean(strtoupper($_POST['username']))])]);
@@ -191,15 +201,13 @@ class user
             return false;
         }
 
-        if (!($_POST['submit'] == 'changepass' && !empty($_POST['password']) && !empty($_POST['old_password']) && !empty($_POST['repassword']) && !empty($_POST['email']) && !empty($_POST['captcha']) && !empty($_SESSION['captcha']))) {
+        if ($_POST['submit'] != 'changepass' || empty($_POST['password']) || empty($_POST['old_password']) || empty($_POST['repassword']) || empty($_POST['email'])) {
             return false;
         }
 
-        if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
+        if (!captcha_validation()) {
             return false;
         }
-        unset($_SESSION['captcha']);
 
         if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
             error_msg('Use valid email.');
@@ -264,18 +272,11 @@ class user
             return false;
         }
 
-        if (!($_POST['submit'] == 'changepass' && !empty($_POST['password']) && !empty($_POST['old_password']) && !empty($_POST['repassword']) && !empty($_POST['username']) && !empty($_POST['captcha']) && !empty($_SESSION['captcha']))) {
+        if ($_POST['submit'] != 'changepass' || empty($_POST['password']) || empty($_POST['old_password']) || empty($_POST['repassword']) || empty($_POST['username'])) {
             return false;
         }
 
-        if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
-            return false;
-        }
-
-        unset($_SESSION['captcha']);
-        if (!preg_match('/^[0-9A-Z-_]+$/', strtoupper($_POST['username']))) {
-            error_msg('Use valid characters for username.');
+        if (!captcha_validation()) {
             return false;
         }
 
@@ -322,7 +323,7 @@ class user
     public static function restorepassword()
     {
         global $antiXss;
-        if (!($_POST['submit'] == 'restorepassword' && !empty($_POST['captcha']) && !empty($_SESSION['captcha']))) {
+        if ($_POST['submit'] != 'restorepassword') {
             return false;
         }
 
@@ -332,12 +333,10 @@ class user
             return false;
         }
 
-        if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
+        if (!captcha_validation()) {
             return false;
         }
 
-        unset($_SESSION['captcha']);
         if (get_config('battlenet_support')) {
             if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
                 error_msg('Use a valid email.');
@@ -351,7 +350,7 @@ class user
             }
 
             $field_acc = $userinfo['email'];
-        } else if (!get_config('battlenet_support')) {
+        } else {
             if (!preg_match('/^[0-9A-Z-_]+$/', strtoupper($_POST['username']))) {
                 error_msg('Use a valid username.');
                 return false;
@@ -391,13 +390,17 @@ class user
             return false;
         }
 
+        if ($restore_key == 1 || strlen($restore_key) < 30) {
+            return false;
+        }
+
         if (get_config('battlenet_support')) {
             if (!filter_var($user_data, FILTER_VALIDATE_EMAIL)) {
                 return false;
             }
 
             $userinfo = self::get_user_by_email(strtoupper($user_data));
-        } else if (!get_config('battlenet_support')) {
+        } else {
             if (!preg_match('/^[0-9A-Z-_]+$/', strtoupper($user_data))) {
                 error_msg('Use a valid username.');
                 return false;
@@ -437,7 +440,7 @@ class user
             ]);
         } else {
             $message = 'Your new account information : <br>Username: ' . strtolower($userinfo['username']) . '<br>Password: ' . $new_password;
-            if (empty(get_config('use_soap'))) {
+            if (empty(get_config('soap_for_register'))) {
                 $hashed_pass = strtoupper(sha1(strtoupper($userinfo['username'] . ':' . $new_password)));
                 database::$auth->update('account', [
                     'sha_pass_hash' => $antiXss->xss_clean($hashed_pass),
@@ -547,5 +550,124 @@ class user
     {
         database::$auth->query("ALTER TABLE `account` ADD COLUMN `restore_key` varchar(255) NULL DEFAULT '1';");
         return true;
+    }
+
+    /**
+     * Enable 2fa
+     * @return bool
+     */
+    public static function tfa_enable()
+    {
+        global $antiXss;
+
+        if (empty(get_config('2fa_support'))) {
+            return false;
+        }
+
+        if (empty($_POST['submit']) || $_POST['submit'] != 'etfa' || empty($_POST['email']) || (empty(get_config('battlenet_support')) && empty($_POST['username']))) {
+            return false;
+        }
+
+        if (!captcha_validation()) {
+            return false;
+        }
+
+        $userinfo = self::get_user_by_email(strtoupper($_POST['email']));
+        if (empty($userinfo['id'])) {
+            error_msg('Account is not valid.');
+            return false;
+        }
+
+        if (empty(get_config('battlenet_support')) && strtolower($userinfo['username']) != strtolower($_POST['username'])) {
+            error_msg('Account is not valid.');
+            return false;
+        }
+
+        $verify_key = md5(strtolower($userinfo['email']) . "_" . time() . rand(1, 999999));
+
+        if (!isset($userinfo['restore_key'])) {
+            self::add_password_key_to_acctbl();
+        }
+
+        database::$auth->update('account', [
+            'restore_key' => $antiXss->xss_clean($verify_key)
+        ], [
+            'id[=]' => $userinfo['id']
+        ]);
+
+        $account = $userinfo['email'];
+        if (empty(get_config('battlenet_support'))) {
+            $account = $userinfo['username'];
+        }
+
+        $restorepass_URL = get_config('baseurl') . '/index.php?enabletfa=' . strtolower($verify_key) . '&account=' . strtolower($account);
+        $message = "Hey, to enable Two-Factor Authentication (2FA), Please open  <a href='$restorepass_URL' target='_blank'>this link</a>: <BR>$restorepass_URL";
+        send_phpmailer(strtolower($userinfo['email']), 'Enable Account 2FA', $message);
+        success_msg('Check your email, (Check SPAM/Junk too).');
+        return true;
+    }
+
+    public static function account_set_2fa($verify_key, $account)
+    {
+        global $antiXss;
+
+        if (empty(get_config('2fa_support'))) {
+            return false;
+        }
+
+        if (empty($verify_key) || empty($account)) {
+            return false;
+        }
+
+        if ($verify_key == 1 || strlen($verify_key) < 30) {
+            return false;
+        }
+
+        $acc_name = "";
+        if (get_config('battlenet_support')) {
+            if (!filter_var($account, FILTER_VALIDATE_EMAIL)) {
+                return false;
+            }
+
+            $userinfo = self::get_user_by_email(strtoupper($account));
+            $acc_name = $userinfo['email'];
+        } else {
+            if (!preg_match('/^[0-9A-Z-_]+$/', strtoupper($account))) {
+                return false;
+            }
+
+            $userinfo = self::get_user_by_username(strtoupper($account));
+            $acc_name = $userinfo['username'];
+        }
+
+        if (empty($userinfo['email'])) {
+            return false;
+        }
+
+        if ($userinfo['restore_key'] != $verify_key) {
+            return false;
+        }
+
+        $tfa_key = strtoupper(generateRandomString(16));
+
+        database::$auth->update('account', [
+            'restore_key' => '1'
+        ], [
+            'id[=]' => $userinfo['id']
+        ]);
+
+        $command = str_replace('{USERNAME}', $antiXss->xss_clean(strtoupper($userinfo['username'])), get_config('soap_2d_command'));
+        RemoteCommandWithSOAP($command);
+        $command = str_replace('{USERNAME}', $antiXss->xss_clean(strtoupper($userinfo['username'])), get_config('soap_2e_command'));
+        $command = str_replace('{SECRET}', $tfa_key, $command);
+        RemoteCommandWithSOAP($command);
+
+        $message = 'Two-Factor Authentication (2FA) enabled on your account.<br>Please scan the barcode with Google Authenticator.<BR>';
+        $message .= '<img src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth://totp/' . get_config('page_title') . '-' . $acc_name . '?secret=' . $tfa_key . '&size=200x200&ecc=M"><BR>';
+        $message .= 'or you can add this code to Google Authenticator: <B>' . $tfa_key . '</B>.<BR>';
+
+        send_phpmailer(strtolower($userinfo['email']), 'Account 2FA enabled', $message);
+
+        success_msg('Account 2FA enabled please check your email, (Check SPAM/Junk too).');
     }
 }

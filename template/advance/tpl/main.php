@@ -45,13 +45,7 @@ require_once 'rules.php';
                                 <input type="password" class="form-control" placeholder="Re-Password"
                                        name="repassword">
                             </div>
-                            <div class="input-group">
-                                <span class="input-group">Captcha</span>
-                                <input type="text" class="form-control" placeholder="Captcha" name="captcha">
-                            </div>
-                            <p style="text-align: center;margin-top: 10px;">
-                                <img src="<?php echo user::$captcha->inline(); ?>" style="border-radius: 5px;"/>
-                            </p>
+                            <?php echo GetCaptchaHTML();?>
                             <input name="submit" type="hidden" value="register">
                             <div class="text-center" style="margin-top: 10px;"><input type="submit"
                                                                                       class="btn btn-success"
@@ -70,7 +64,58 @@ require_once 'rules.php';
                             Restore Password
                         </button>
                     </div>
-                    <?php if (get_config('vote_system')) { ?>
+                    <?php if (get_config('2fa_support')) { ?>
+                        <div class="text-center" data-aos="fade-up" data-aos-delay="100" style="margin-top: 5px;">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal"
+                                    data-target="#e2fa-modal">
+                                Two-Factor Authentication
+                            </button>
+                        </div>
+                        <div class="modal" id="e2fa-modal">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Two-Factor Authentication</h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="<?php echo $antiXss->xss_clean(get_config("baseurl")); ?>/index.php#register"
+                                              method="post">
+                                            <div>
+                                                <ul>
+                                                    <li>Install Google Authenticator. <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.authenticator2" target="_blank">Google Store</a> - <a href="https://apps.apple.com/app/google-authenticator/id388497605" target="_blank">Apple Store</a></li>
+                                                </ul>
+                                            </div>
+                                                <div class="input-group">
+                                                    <span class="input-group">Email</span>
+                                                    <input type="email" class="form-control" placeholder="Email"
+                                                           name="email">
+                                                </div>
+                                                <?php if (empty(get_config('battlenet_support'))) { ?>
+                                                <div class="input-group">
+                                                    <span class="input-group">Username</span>
+                                                    <input type="text" class="form-control" placeholder="Username"
+                                                           name="username">
+                                                </div>
+                                                <?php } echo GetCaptchaHTML();?>
+                                                <input name="submit" type="hidden" value="etfa">
+                                                <div class="text-center" style="margin-top: 10px;"><input
+                                                            type="submit"
+                                                            class="btn btn-primary"
+                                                            value="Enable 2FA"></div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">
+                                            Close
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    <?php }
+                    if (get_config('vote_system')) { ?>
                         <div class="text-center" data-aos="fade-up" data-aos-delay="100" style="margin-top: 5px;">
                             <button type="button" class="btn btn-danger" data-toggle="modal"
                                     data-target="#vote-modal">
@@ -146,16 +191,8 @@ require_once 'rules.php';
                                                 <input type="text" class="form-control" placeholder="Username"
                                                        name="username">
                                             </div>
-                                        <?php } ?>
-                                        <div class="input-group">
-                                            <span class="input-group">Captcha</span>
-                                            <input type="text" class="form-control" placeholder="Captcha"
-                                                   name="captcha">
-                                        </div>
-                                        <p style="text-align: center;margin-top: 10px;">
-                                            <img src="<?php echo user::$captcha->inline(); ?>"
-                                                 style="border-radius: 5px;"/>
-                                        </p>
+                                        <?php }
+                                        echo GetCaptchaHTML();?>
                                         <input name="submit" type="hidden" value="restorepassword">
                                         <div class="text-center" style="margin-top: 10px;"><input
                                                     type="submit"
@@ -213,15 +250,7 @@ require_once 'rules.php';
                                                    placeholder="Re-Password"
                                                    name="repassword">
                                         </div>
-                                        <div class="input-group">
-                                            <span class="input-group">Captcha</span>
-                                            <input type="text" class="form-control" placeholder="Captcha"
-                                                   name="captcha">
-                                        </div>
-                                        <p style="text-align: center;margin-top: 10px;">
-                                            <img src="<?php echo user::$captcha->inline(); ?>"
-                                                 style="border-radius: 5px;"/>
-                                        </p>
+                                        <?php echo GetCaptchaHTML();?>
                                         <input name="submit" type="hidden" value="changepass">
                                         <div class="text-center" style="margin-top: 10px;"><input
                                                     type="submit"
@@ -289,6 +318,9 @@ require_once 'rules.php';
                                 echo '<table class="table table-striped"><thead><tr><th scope="col">Rank</th><th scope="col">Name</th><th scope="col">Race</th> <th scope="col">Class</th><th scope="col">Level</th><th scope="col">Play Time</th></tr></thead><tbody>';
                                 $m = 1;
                                 foreach ($data2show as $one_char) {
+                                    if(empty($one_char['name'])) {
+                                        continue;
+                                    }
                                     echo '<tr><td>' . $m++ . '<th scope="row">' . $antiXss->xss_clean($one_char['name']) . '</th><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/race/' . $antiXss->xss_clean($one_char["race"]) . '-' . $antiXss->xss_clean($one_char["gender"]) . '.gif\'></td><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/class/' . $antiXss->xss_clean($one_char["class"]) . '.gif\'></td><td>' . $antiXss->xss_clean($one_char['level']) . '</td><td>' . $antiXss->xss_clean(get_human_time_from_sec($one_char['totaltime'])) . '</td></tr>';
                                 }
                                 echo '</table>';
@@ -305,6 +337,9 @@ require_once 'rules.php';
                                 echo '<table class="table table-striped"><thead><tr><th scope="col">Rank</th><th scope="col">Name</th><th scope="col">Race</th> <th scope="col">Class</th><th scope="col">Level</th><th scope="col">Kills</th></tr></thead><tbody>';
                                 $m = 1;
                                 foreach ($data2show as $one_char) {
+                                    if(empty($one_char['name'])) {
+                                        continue;
+                                    }
                                     echo '<tr><td>' . $m++ . '<th scope="row">' . $antiXss->xss_clean($one_char['name']) . '</th><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/race/' . $antiXss->xss_clean($one_char["race"]) . '-' . $antiXss->xss_clean($one_char["gender"]) . '.gif\'></td><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/class/' . $antiXss->xss_clean($one_char["class"]) . '.gif\'></td><td>' . $antiXss->xss_clean($one_char['level']) . '</td><td>' . $antiXss->xss_clean($one_char['totalKills']) . '</td></tr>';
                                 }
                                 echo '</table>';
@@ -327,6 +362,9 @@ require_once 'rules.php';
                                 echo '<th scope="col">Honor Points</th></tr></thead><tbody>';
                                 $m = 1;
                                 foreach ($data2show as $one_char) {
+                                    if(empty($one_char['name'])) {
+                                        continue;
+                                    }
                                     echo '<tr><td>' . $m++ . '<th scope="row">' . $antiXss->xss_clean($one_char['name']) . '</th><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/race/' . $antiXss->xss_clean($one_char["race"]) . '-' . $antiXss->xss_clean($one_char["gender"]) . '.gif\'></td><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/class/' . $antiXss->xss_clean($one_char["class"]) . '.gif\'></td><td>' . $antiXss->xss_clean($one_char['level']) . '</td>';
 
                                     if (get_config('expansion') >= 6) {
@@ -352,6 +390,9 @@ require_once 'rules.php';
                                 echo '<table class="table table-striped"><thead><tr><th scope="col">Rank</th><th scope="col">Name</th><th scope="col">Race</th> <th scope="col">Class</th><th scope="col">Level</th><th scope="col">Arena Points</th></tr></thead><tbody>';
                                 $m = 1;
                                 foreach ($data2show as $one_char) {
+                                    if(empty($one_char['name'])) {
+                                        continue;
+                                    }
                                     echo '<tr><td>' . $m++ . '<th scope="row">' . $antiXss->xss_clean($one_char['name']) . '</th><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/race/' . $antiXss->xss_clean($one_char["race"]) . '-' . $antiXss->xss_clean($one_char["gender"]) . '.gif\'></td><td><img src=\'' . get_config("baseurl") . '/template/' . $antiXss->xss_clean(get_config("template")) . '/images/class/' . $antiXss->xss_clean($one_char["class"]) . '.gif\'></td><td>' . $antiXss->xss_clean($one_char['level']) . '</td><td>' . $antiXss->xss_clean($one_char['arenaPoints']) . '</td></tr>';
                                 }
                                 echo '</table>';
@@ -369,6 +410,11 @@ require_once 'rules.php';
                                 $m = 1;
                                 foreach ($data2show as $one_char) {
                                     $character_data = status::get_character_by_guid($onerealm['realmid'], $one_char['captainGuid']);
+
+                                    if(empty($character_data['name'])) {
+                                        continue;
+                                    }
+                                    
                                     echo '<tr><td>' . $m++ . '<th scope="row">' . $antiXss->xss_clean($one_char['name']) . '</th><td>' . $antiXss->xss_clean($one_char['rating']) . '</td><td>' . (!empty($character_data["name"]) ? $antiXss->xss_clean($character_data['name']) : '-') . '</td></tr>';
                                 }
                                 echo '</table>';
