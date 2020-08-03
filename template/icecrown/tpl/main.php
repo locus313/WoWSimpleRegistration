@@ -557,7 +557,7 @@ As stated earlier this is a passion project and is worked on when time is availa
             <div class="box1">
                 Discord
                 <hr style="border-color: #00CCFF;">
-                <iframe src="https://discordapp.com/widget?id=376650959532589057&theme=dark" width="330"
+                <iframe src="https://discordapp.com/widget?id=645127101913104388&theme=dark" width="330"
                         height="600" allowtransparency="true" frameborder="0"></iframe>
             </div>
         </div>
