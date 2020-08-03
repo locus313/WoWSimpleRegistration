@@ -675,8 +675,8 @@ class user
         ]);
 
         $message = 'Two-Factor Authentication (2FA) enabled on your account.<br>Please scan the barcode with Google Authenticator.<BR>';
-        $message .= '<img src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth://totp/' . get_config('page_title') . '-' . $acc_name . '?secret=' . $tfa_secret . '&size=200x200&ecc=M"><BR>';
-        $message .= 'or you can add this code to Google Authenticator: <B>' . $tfa_secret . '</B>.<BR>';
+        $message .= '<img src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth://totp/'. get_config('page_title') . ':' . $acc_name . '?secret=' . $tfa_secret . '&issuer=' . get_config('page_title') . '&size=200x200&ecc=M"><BR>';
+	$message .= 'or you can add this code to Google Authenticator: <B>' . $tfa_secret . '</B>.<BR>';
 
         send_phpmailer(strtolower($userinfo['email']), 'Account 2FA enabled', $message);
 
