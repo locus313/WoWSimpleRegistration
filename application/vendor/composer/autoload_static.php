@@ -32,6 +32,7 @@ class ComposerStaticInitde424ad7860a40a14ec11f109060d25d
         ),
         'P' => 
         array (
+            'ParagonIE\\ConstantTime\\' => 23,
             'PHPMailer\\PHPMailer\\' => 20,
         ),
         'M' => 
@@ -77,6 +78,10 @@ class ComposerStaticInitde424ad7860a40a14ec11f109060d25d
         'Symfony\\Component\\Finder\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/finder',
+        ),
+        'ParagonIE\\ConstantTime\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/paragonie/constant_time_encoding/src',
         ),
         'PHPMailer\\PHPMailer\\' => 
         array (
