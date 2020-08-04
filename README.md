@@ -4,16 +4,17 @@ With this script, You can make a website for your game server.
 
 Support : [AzerothCore](http://azerothcore.org), [TrinityCore](http://TrinityCore.org), [AshamaneCore](https://github.com/ReyDonovan/AshamaneCoreLegacy/), [CMangos](https://github.com/cmangos/).
 
+
+## Requirement : PHP >= 7.0
+
+Enable gmp, gd, soap, mbstring, pdo and pdo-mysql.
+
 # Installation
 
  - Download project & unzip.
  - Go to `application/config/` folder and change `config.php.sample` file name to `config.php`
  - Open the config file and set your server data.
  - Enjoy that.
-
-## Requirement : PHP >= 7.0
-
-Enable gd, soap, mbstring, pdo and pdo-mysql.
 
 # Debug
 
@@ -34,7 +35,10 @@ If you got a blank screen, You can enable `debug_mode` in the config file.
 
 ## Changelogs
 
- **1.9.7 (7/28/2020):**
+ **1.9.7.5 (8/03/2020):**
+ 1. Support SRP6.
+ 
+  **1.9.7 (7/28/2020):**
  1. Support Two-Factor Authentication (2FA)
  2. Fixed a low-level vulnerability. (UPDATE TO THIS VERSION)
  3. Fixed some of the bugs.

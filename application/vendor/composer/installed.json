@@ -136,7 +136,11 @@
         },
         "time": "2019-03-20T00:55:58+00:00",
         "type": "library",
+<<<<<<< HEAD
         "installation-source": "source",
+=======
+        "installation-source": "dist",
+>>>>>>> e8ad4d97bfea0a8835980b9a35fc6dc5f4ec2256
         "autoload": {
             "classmap": [
                 "PHPGangsta/GoogleAuthenticator.php"
