@@ -6,7 +6,6 @@
         "phpmailer/phpmailer": "^6.0",
         "gregwar/captcha": "^1.1",
         "catfan/medoo": "^1.6",
-        "phpgangsta/googleauthenticator": "dev-master",
-        "paragonie/constant_time_encoding": "^2.3"
+        "phpgangsta/googleauthenticator": "dev-master"
     }
 }
