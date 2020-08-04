@@ -766,6 +766,12 @@ class user
         $command = str_replace('{SECRET}', $tfa_key, $command);
         RemoteCommandWithSOAP($command);
 
+	database::$auth->update('account', [
+	    'token_key' => $tfa_key
+	], [
+	    'id[=]' => $userinfo['id']
+	]);
+
         $acc_name = str_replace('-', '', $acc_name);
         $acc_name = str_replace('.', '', $acc_name);
         $acc_name = str_replace('_', '', $acc_name);
