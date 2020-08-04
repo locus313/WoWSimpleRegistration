@@ -8,9 +8,6 @@
 
 use Gregwar\Captcha\CaptchaBuilder;
 use Medoo\Medoo;
-use \ParagonIE\ConstantTime\Base32;
-
-require_once __DIR__ . '/../vendor/autoload.php';
 
 
 class user
@@ -654,7 +651,6 @@ class user
 
 	$ga = new PHPGangsta_GoogleAuthenticator();
         $tfa_key = $ga->createSecret();
-        $tfa_secret = Base32::encodeUpperUnpadded($tfa_key);
 
         database::$auth->update('account', [
             'restore_key' => '1'
@@ -669,14 +665,14 @@ class user
         RemoteCommandWithSOAP($command);
 
 	database::$auth->update('account', [
-            'token_key' => $antiXss->xss_clean($tfa_secret)
-        ], [
-            'id[=]' => $userinfo['id']
-        ]);
+    	    'token_key' => $tfa_key
+	], [
+    	    'id[=]' => $userinfo['id']
+	]);
 
         $message = 'Two-Factor Authentication (2FA) enabled on your account.<br>Please scan the barcode with Google Authenticator.<BR>';
-        $message .= '<img src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth://totp/'. get_config('page_title') . ':' . $acc_name . '?secret=' . $tfa_secret . '&issuer=' . get_config('page_title') . '&size=200x200&ecc=M"><BR>';
-	$message .= 'or you can add this code to Google Authenticator: <B>' . $tfa_secret . '</B>.<BR>';
+        $message .= '<img src="https://api.qrserver.com/v1/create-qr-code/?data=otpauth://totp/'. get_config('page_title') . ':' . $acc_name . '?secret=' . $tfa_key . '&issuer=' . get_config('page_title') . '&size=200x200&ecc=M"><BR>';
+	$message .= 'or you can add this code to Google Authenticator: <B>' . $tfa_key . '</B>.<BR>';
 
         send_phpmailer(strtolower($userinfo['email']), 'Account 2FA enabled', $message);
 
