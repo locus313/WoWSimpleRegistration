@@ -64,13 +64,14 @@ by smaller groups of players.</li>
 <li style="text-align: left">Individual EXP rates: The default rate is x1, but we get it, leveling is not for everyone. To make it a little easier you can adjust your rate up to x4 by typing .xp set 4 </li>
 <li style="text-align: left">World Chat: To keep the player base connected no matter their play style we have a cross faction world chat channel. Just type /join World </li>
 <li style="text-align: left">Auction House Scripting: the AH is filled with Items for trade skills, greens and blues for gearing while leveling, quest items and other useful things that really help out simulating what you might find on a server with more people making things available.</li>
+<li style="text-align: left">Starter items: Every new character will start with 4 x 12 slot bags.</li>
+<li style="text-align: left">Transmogrification: Add a sense of uniqueness to your character, making you stand out from the crowd.</li>
                         </ul>
                         </p><br>
                         <p style="text-align: justify">
                         What features are being worked on?<br>
                         <ul>
-                        <li style="text-align: left">Transmogrification</li>
-                        <li style="text-align: left">Helpful starter items when you roll new characters so you're not starting out empty handed.</li>
+                        <li style="text-align: left">Cross Faction Battleground</li>
                         </ul>
                         If you have any suggestions please let us know!
                         </p><br>
