@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amin Mahmoudi (MasterkinG)
- * @copyright    Copyright (c) 2019 - 2022, MsaterkinG32 Team, Inc. (https://masterking32.com)
+ * @copyright    Copyright (c) 2019 - 2020, MasterkinG32. (https://masterking32.com)
  * @link    https://masterking32.com
  * @Description : It's not masterking32 framework !
  **/
@@ -234,7 +234,7 @@ function captcha_validation()
 {
     if (empty(get_config('captcha_type')) && !empty($_POST['captcha']) && !empty($_SESSION['captcha'])) {
         if (strtolower($_SESSION['captcha']) != strtolower($_POST['captcha'])) {
-            error_msg('Captcha is not valid.');
+            error_msg(lang('captcha_not_valid'));
             return false;
         }
         unset($_SESSION['captcha']);
@@ -242,16 +242,16 @@ function captcha_validation()
         return true;
     } elseif (!empty(get_config('captcha_type')) && get_config('captcha_type') == 1 && !empty($_POST['h-captcha-response'])) {
         if (!validate_hcaptcha($_POST['h-captcha-response'])) {
-            error_msg('HCaptcha is not valid.');
+            error_msg(lang('hcaptcha_not_valid'));
             return false;
         }
     } elseif (!empty(get_config('captcha_type')) && get_config('captcha_type') == 2 && !empty($_POST['g-recaptcha-response'])) {
         if (!validate_recaptcha($_POST['g-recaptcha-response'])) {
-            error_msg('ReCaptcha is not valid.');
+            error_msg(lang('recaptcha_not_valid'));
             return false;
         }
     } else {
-        error_msg('Captcha is required.');
+        error_msg(lang('captcha_required'));
         return false;
     }
 
@@ -271,7 +271,7 @@ function getCaptchaJS()
     return '';
 }
 
-function GetCaptchaHTML()
+function GetCaptchaHTML($bootstrap = true)
 {
     if (!empty(get_config('captcha_type'))) {
         if (get_config('captcha_type') == 1) {
@@ -283,7 +283,12 @@ function GetCaptchaHTML()
         }
     }
 
-    return '<div class="input-group"><span class="input-group">Captcha</span><input type="text" class="form-control" placeholder="Captcha" name="captcha"></div><p style="text-align: center;margin-top: 10px;"><img src="' . user::$captcha->inline() . '" style="border - radius: 5px;"/></p>';
+    if(empty($bootstrap))
+    {
+        return '<div class="input-group"><input type="text" placeholder="' . lang('captcha') . '" name="captcha"></div><p style="text-align: center;margin-top: 10px;"><img src="' . user::$captcha->inline() . '" style="border - radius: 5px;"/></p>';
+    }
+
+    return '<div class="input-group"><span class="input-group">' . lang('captcha') . '</span><input type="text" class="form-control" placeholder="' . lang('captcha') . '" name="captcha"></div><p style="text-align: center;margin-top: 10px;"><img src="' . user::$captcha->inline() . '" style="border - radius: 5px;"/></p>';
 }
 
 // Its from Trinitycore/account-creator
@@ -340,4 +345,20 @@ function verifySRP6($user, $pass, $salt, $verifier)
     );
     $v = gmp_powm($g, $x, $N);
     return ($verifier === str_pad(gmp_export($v, 1, GMP_LSW_FIRST), 32, chr(0), STR_PAD_RIGHT));
+}
+
+// Get language text
+function lang($val)
+{
+    global $language;
+    if (!empty($language[$val])) {
+        return $language[$val];
+    }
+    return "";
+}
+
+// Echo language text
+function elang($val)
+{
+    echo lang($val);
 }

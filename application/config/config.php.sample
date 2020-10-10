@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amin Mahmoudi (MasterkinG)
- * @copyright    Copyright (c) 2019 - 2022, MsaterkinG32 Team, Inc. (https://masterking32.com)
+ * @copyright    Copyright (c) 2019 - 2020, MasterkinG32. (https://masterking32.com)
  * @link    https://masterking32.com
  * @Description : It's not masterking32 framework !
  **/
@@ -11,9 +11,12 @@ baseurl
     That's your website URL. Example: "https://DOMAIN.COM"
 page_title
     That's your website title. Example: "My WOW Private server!"
+language
+    Website language (english/persian/italian/chinese-simplified/chinese-traditional/swedish/french/german/spanish)
 =====================================================================*/
 $config['baseurl'] = "http://localhost";
 $config['page_title'] = "Simple Register";
+$config['language'] = "english";
 /*===================================================================
 If you see a white screen or have an issue, you can enable it to see the errors.
 Note that after testing, be sure to disable this option.
@@ -51,6 +54,10 @@ $config['battlenet_support'] = false;
 /*===================================================================
 If your core password encryption is SRP6, you need to enable it.
 For last versions of the TrinityCore(3.3.5/master) you need to enable it. https://git.io/JJRH4 and https://git.io/JJrxq
+Enable that if you use the last version of TC.
+You need to enable the GMP extension for PHP.
+=====================================================================
+******Uncomment extension=gmp in your php.ini******
 =====================================================================*/
 $config['srp6_support'] = false;
 /*===================================================================
@@ -60,8 +67,8 @@ disable_top_players
 disable_online_players
     Disable online players page [true: Hide online players page]
 disable_changepassword
-    Disable change password - [Enable it for CMangos and servers with SRP6]
-    For CMangos and servers with SRP6 you can enable change password command for players (in-game)
+    Disable change password
+    Change this to true, If you are using SOAP for registration.
 =====================================================================*/
 $config['disable_top_players'] = false;
 $config['disable_online_players'] = false;
@@ -76,6 +83,7 @@ light
 advance
 icecrown
 kaelthas
+battleforazeroth
 =====================================================================*/
 $config['template'] = 'light';
 /*===================================================================
@@ -143,6 +151,8 @@ captcha_secret/captcha_secret
 captcha_language
     https://docs.hcaptcha.com/languages
     https://developers.google.com/recaptcha/docs/language
+=====================================================================
+******Uncomment extension=gd2 in your php.ini******
 =====================================================================*/
 $config['captcha_type'] = 0;
 $config['captcha_key'] = '';
@@ -184,6 +194,8 @@ soap_asa_command
     This command will be run after soap_ca_command.
     If you don't want to run any command after soap_ca_command you can make it empty like this: ''
     account set addon {USERNAME} {EXPANSION}
+=====================================================================
+******Uncomment extension=soap in your php.ini******
 =====================================================================*/
 $config['soap_for_register'] = false;
 $config['soap_host'] = '127.0.0.1';
@@ -288,4 +300,4 @@ $config['realmlists'] = array( // Add your realmlist here
 
 
 
-$config['script_version'] = '1.9.8';
+$config['script_version'] = '2.0.0';

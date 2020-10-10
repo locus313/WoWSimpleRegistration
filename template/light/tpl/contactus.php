@@ -6,7 +6,8 @@
  * Date: 11/26/2018 - 8:36 PM
  */
 ?>
-<div style="text-align: left;padding: 10px;line-height: 1.5;">
-    <p>Join our <a href="https://discord.gg/P5u4vaW" target="_blank">Discord</a>.</p>
-    <p>Email : pat@lo5t.com</p>
+<div class="content_box1" style="line-height: 1.5;">
+    <p><a href="https://discord.gg/P5u4vaW" target="_blank">Discord</a></p>
+    <p><?php elang('email'); ?> : pat@lo5t.com</p>
+    <p><?php elang('edit_on'); ?> template/<?php echo $antiXss->xss_clean(get_config("template")); ?>/tpl/contactus.php</p>
 </div>

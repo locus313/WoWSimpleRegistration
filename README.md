@@ -2,7 +2,7 @@
 
 With this script, You can make a website for your game server.
 
-Support : [AzerothCore](http://azerothcore.org), [TrinityCore](http://TrinityCore.org), [AshamaneCore](https://github.com/ReyDonovan/AshamaneCoreLegacy/), [CMangos](https://github.com/cmangos/).
+Support : [AzerothCore](http://azerothcore.org), [TrinityCore](http://TrinityCore.org), [AshamaneCore](https://github.com/AshamaneProject/AshamaneCore/), [CMangos](https://github.com/cmangos/).
 
 
 ## Requirement : PHP >= 7.0
@@ -27,15 +27,23 @@ If you got a blank screen, You can enable `debug_mode` in the config file.
  3. Show TOPs by Playtime, Kills, Honor Point, Arena Point, Arena Team (Multi-Realm support).
  4. How to connect Page.
  5. Contact us page.
- 6. Change Password (4/10/2019).
- 7. Restore Password (5/31/2019).
- 8. Vote System (4/03/2020).
- 9. Support HCaptcha/Recaptcha v2 (7/27/2020).
- 9. Support Two-Factor Authentication (2FA) (7/28/2020).
+ 6. Multiple template (Light, Icecrown, Kaelthas, Advance, Battle for Azeroth).
+ 7. Change Password (4/10/2019).
+ 8. Restore Password (5/31/2019).
+ 9. Vote System (4/03/2020).
+ 10. Support HCaptcha/Recaptcha v2 (7/27/2020).
+ 11. Support Two-Factor Authentication (2FA) (7/28/2020).
+ 12. **Multi-Language support** (9/10/2020) (Support: 🇬🇧 English, 🇮🇷 Persian, 🇮🇹 Italian, 🇨🇳 Chinese-simplified, 🇹🇼 Chinese-traditional, 🇸🇪 Swedish, 🇫🇷 French, 🇩🇪 German, 🇪🇸 Spanish).
 
 ## Changelogs
 
- **1.9.7.5 (8/03/2020):**
+ **2.0.0 (8/03/2020):**
+ 1. Added Battle for Azeroth template.
+ 
+ **1.9.9 (8/03/2020):**
+ 1. Multi-Language support.
+ 
+ **1.9.8 (8/03/2020):**
  1. Support SRP6.
  
   **1.9.7 (7/28/2020):**
@@ -69,26 +77,16 @@ If you got a blank screen, You can enable `debug_mode` in the config file.
  1. Allow using an email for multiple accounts. (For non-battle.net servers)
  2. Replace Email to username for change password and restore password. (For non-battle.net servers)
  3. Add an option to enable or disable top players and online players.
- 
-## DEMO
-
-RESTORE PASSWORD DOESN'T WORK IN DEMO VERSIONS.
-
-### LIVE DEMO IS FOR OLD VERSION!
-
-[Light Template](http://wowsimpleregistration.gigfa.com/light/)
-
-[IceCrown Template](http://wowsimpleregistration.gigfa.com/icecrown/)
-
-[Kaelthas Template](http://wowsimpleregistration.gigfa.com/kaelthas/)
-
-Advance Template - NO HAVE LIVE DEMO!
 
 ## Screenshots
 
 ## Advance Template
 
-![BFA](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-bfa-min.jpg)
+![Advance](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/a-bfa-min.jpg)
+
+## Battle for Azeroth
+
+![BFA](https://raw.githubusercontent.com/masterking32/WoWSimpleRegistration/master/screenshots/b1.jpg)
 
 ## Light Template
 
@@ -108,3 +106,18 @@ Need more screenshots? [Check here](https://github.com/masterking32/WoWSimpleReg
 Author : [Amin.MasterkinG](https://masterking32.com)
 
 
+## Translate
+
+English/Persian by [Amin.MasterkinG](https://github.com/masterking32)
+
+Italian by [Helias](https://github.com/helias)
+
+Chinese-simplified/Chinese-traditional by [Coolzoom](https://github.com/coolzoom)
+
+Swedish by [Kitzunu](https://github.com/Kitzunu)
+
+French by [Kalorte](https://github.com/Kalorte)
+
+German by [DuelistRag3](https://github.com/DuelistRag3)
+
+Spanish by [xjose93](https://github.com/xjose93)
