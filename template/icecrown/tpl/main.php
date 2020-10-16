@@ -80,8 +80,6 @@ by smaller groups of players.</li>
                         Most all questing here works normally, however no server is perfect. Even retail needs fixes. Bugs and errors happen. While we're doing our best to keep things working as intended, some fixes may take some time, or shelved for more important issues.<br>
 As stated earlier this is a passion project and is worked on when time is available. Please try to keep this in mind.
                         </p>
-                        <p><?php elang('edit_on'); ?> template/<?php echo $antiXss->xss_clean(get_config("template")); ?>
-                            /tpl/main.php</p>
                     </div>
                     <div class="tab-pane fade in <?php echo(!(empty($error_error) && empty($success_msg)) ? 'active' : ''); ?>"
                          id="pills-register">
