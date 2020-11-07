@@ -11,7 +11,7 @@ use SebastianBergmann\Timer\Timer;
 ?>
 <div class="row">
     <div class="text-center box1">
-        Developed by <a href="http://masterking32.com">MasterkinG32.CoM</a>
+        Developed by <a href="http://masterking32.com">MasterkinG32.CoM</a><br><br>
         - <?php echo "Load " . Timer::resourceUsage(); ?>
         <img src="<?php echo $antiXss->xss_clean(get_config("baseurl")); ?>/template/<?php echo $antiXss->xss_clean(get_config("template")); ?>/images/ac_powered_by.png" class="logo" alt=""></a>
     </div>
