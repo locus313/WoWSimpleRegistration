@@ -13,7 +13,7 @@ use SebastianBergmann\Timer\Timer;
     <div class="text-center box1">
         Developed by <a href="http://masterking32.com">MasterkinG32.CoM</a>
         - <?php echo "Load " . Timer::resourceUsage(); ?><br><br>
-        <img src="<?php echo $antiXss->xss_clean(get_config("baseurl")); ?>/template/<?php echo $antiXss->xss_clean(get_config("template")); ?>/images/ac_powered_by.png" class="logo" alt=""></a>
+        <a href="https://www.azerothcore.org/"><img src="<?php echo $antiXss->xss_clean(get_config("baseurl")); ?>/template/<?php echo $antiXss->xss_clean(get_config("template")); ?>/images/ac_powered_by.png" class="logo" alt=""></a>
     </div>
 </div>
 </div>
