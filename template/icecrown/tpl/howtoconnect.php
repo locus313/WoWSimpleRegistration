@@ -17,4 +17,5 @@
     <p>4. <?php elang(''); ?>Erase all text and change it to:</p>
     <p style="text-align: center;font-weight: bold;color:darkred">set
         realmlist <?php echo get_config('realmlist'); ?></p>
+    <p>5. <?php elang(''); ?>Make sure to use the username your created during the registration process to connect. Do not use your email address.</p>
 </div>
