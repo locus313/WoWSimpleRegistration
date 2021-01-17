@@ -8,7 +8,7 @@
 ?>
 <div class="content_box1" style="line-height: 1.5;">
     <p>1. <?php elang(''); ?>First of all, you must create an account. The account is used to log into both the game and our website. Click
-        here to open the registration page.</p>
+        <a onclick="$('#register').trigger('click')" style="color:red">here</a> to open the registration page.</p>
     <p>2. <?php elang(''); ?>Install World of Warcraft. You can download it from here: <a href="https://mega.nz/file/lJwE3C6T#foGVjhD_3jt5PEG2r6XQA2BizAfF4j-8BaN2-dpEevI" target="_blank" style="color:red">Windows</a> <!-- or Mac. Make sure to upgrade to
         our current supported patch, which is 3.3.5 (build 12340). Patch mirrors can be found here. --> </p>
     <p>3. <?php elang(''); ?>Open up the "World of Warcraft" directory. The default directory is "C:\Program Files\World of Warcraft". When
