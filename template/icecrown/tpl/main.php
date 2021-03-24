@@ -47,23 +47,39 @@ require_once 'header.php'; ?>
                 <div class="tab-content" id="nav-tabContent">
                     <div class="tab-pane fade in <?php echo((empty($error_error) && empty($success_msg)) ? 'active' : ''); ?>"
                          id="pills-main">
-                        <?php elang('welcome_message'); ?>
+                        <?php elang('Welcome to Lo5t!'); ?>
                         <hr style="border-color: #00CCFF;">
                         <p style="text-align: justify">
-                            This is a sample text, This is a sample text, This is a sample text, This is a sample
-                            text, This is a sample text, This is a sample text, This is a sample text, This is a
-                            sample text, This is a sample text, This is a sample text, This is a sample text, This
-                            is a sample text, This is a sample text, This is a sample text, This is a sample text,
-                            This is a sample text, This is a sample text, This is a sample text, This is a sample
-                            text, This is a sample text, This is a sample text, This is a sample text, This is a
-                            sample text, This is a sample text, This is a sample text, This is a sample text, This
-                            is a sample text, This is a sample text, This is a sample text, This is a sample text,
-                            This is a sample text, This is a sample text, This is a sample text, This is a sample
-                            text, This is a sample text, This is a sample text, This is a sample text, This is a
-                            sample text, This is a sample text.
+                        Lo5t is a private PVE World of Warcraft server passion-project, with an intimate friendly community. We have several implemented custom features to enable players tohave fun and complete content despite a smaller player base. There is no pay shop, no donations requested, the server is not run as a business.<br><br>
+Our goal is to create a place where mature, like-minded, members who are willing to treat others equally, adhere to common ground rules of ethics, and to assist each other for one purpose-
+to enjoy their time spent here online. We want it to be a friendly and welcoming place to play, no matter your play style. We understand not everyone plays the same, some may enjoy being part of a large guild, while other just want to play solo, or with a few friends.<br><br>
+We are interested in players that are intrigued by being part of a small community where everyone knows and talks to one another, they're not "lost" in a sea of players. There is no drama/trolling like is often encountered on other servers. Players that incite a toxic atmosphere will not be tolerated, and end up alienating thems elves quickly with the community. We believe each player should treat every other player in the same manner in which that player would expect to be treated. We also believe that the actions of one member reflect on every single member of the community. Each player represents the server, and should act accordingly.
+                        </p><br><br>
+                        <p style="text-align: justify">
+                        What custom features have been implemented?<br>
+                        <ul>
+<li style="text-align: left">Cross Faction: So our small player base isn't broken apart and players can pick whatever race they like. (pretty much everything is cross-faction, guilds, parties, raids, auction house)</li>
+<li style="text-align: left">Auto Balance: this scales dungeons and raids, currently changing mob stats based on how many players are inside the instance, which allows them to be completed
+by smaller groups of players.</li>
+<li style="text-align: left">Individual EXP rates: The default rate is x1, but we get it, leveling is not for everyone. To make it a little easier you can adjust your rate up to x4 by typing .xp set 4 </li>
+<li style="text-align: left">World Chat: To keep the player base connected no matter their play style we have a cross faction world chat channel. Just type /join World </li>
+<li style="text-align: left">Auction House Scripting: the AH is filled with Items for trade skills, greens and blues for gearing while leveling, quest items and other useful things that really help out simulating what you might find on a server with more people making things available.</li>
+<li style="text-align: left">Starter items: Every new character will start with 4 x 12 slot bags.</li>
+<li style="text-align: left">Transmogrification: Add a sense of uniqueness to your character, making you stand out from the crowd.</li>
+                        </ul>
+                        </p><br>
+                        <p style="text-align: justify">
+                        What features are being worked on?<br>
+                        <ul>
+                        <li style="text-align: left">Cross Faction Battleground</li>
+                        </ul>
+                        If you have any suggestions please let us know!
+                        </p><br>
+                        <p style="text-align: justify">
+                        Is there anything that doesn't work?<br>
+                        Most all questing here works normally, however no server is perfect. Even retail needs fixes. Bugs and errors happen. While we're doing our best to keep things working as intended, some fixes may take some time, or shelved for more important issues.<br>
+As stated earlier this is a passion project and is worked on when time is available. Please try to keep this in mind.
                         </p>
-                        <p><?php elang('edit_on'); ?> template/<?php echo $antiXss->xss_clean(get_config("template")); ?>
-                            /tpl/main.php</p>
                     </div>
                     <div class="tab-pane fade in <?php echo(!(empty($error_error) && empty($success_msg)) ? 'active' : ''); ?>"
                          id="pills-register">
@@ -521,7 +537,7 @@ require_once 'header.php'; ?>
             <div class="box1">
                 Discord
                 <hr style="border-color: #00CCFF;">
-                <iframe src="https://discordapp.com/widget?id=376650959532589057&theme=dark" width="330"
+                <iframe src="https://discordapp.com/widget?id=645127101913104388&theme=dark" width="330"
                         height="600" allowtransparency="true" frameborder="0"></iframe>
             </div>
         </div>
