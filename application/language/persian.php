@@ -1,7 +1,7 @@
 <?php
 /**
  * @author Amin Mahmoudi (MasterkinG)
- * @copyright    Copyright (c) 2019 - 2020, MasterkinG32. (https://masterking32.com)
+ * @copyright    Copyright (c) 2019 - 2021, MasterkinG32. (https://masterking32.com)
  * @link    https://masterking32.com
  * @Description : It's not masterking32 framework !
  **/
@@ -13,6 +13,11 @@ $language['tpl_advance_custom_css'] = '#hero .btn-get-started, .why-us .accordio
 $language['tpl_icecrown_custom_css'] = '';
 $language['tpl_kaelthas_custom_css'] = '';
 $language['tpl_battleforazeroth_custom_css'] = '.hero-section, .hero-slider, .progressBar, .owl-stage-outer, .owl-nav, .owl-dots, .owl-stage{ direction: ltr;} p, .site-btn, .site-btn-login{font-family: vazir;}';
+
+// Lang changer
+$language['change_lang_head'] = 'Language Changer';
+$language['change_lang_form_head'] = 'Select Language';
+$language['change_lang_sub'] = 'Change';
 
 $language['welcome_to'] = 'خوش آمدید به';
 $language['welcome_message'] = 'به سرور شخصی ما خوش آمدید، هم اکنون به جمع ما بپیوندید.';
